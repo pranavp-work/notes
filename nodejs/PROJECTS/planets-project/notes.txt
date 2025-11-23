@@ -1,3 +1,6 @@
 https://science.nasa.gov/mission/kepler/
 https://science.nasa.gov/exoplanets/can-we-find-life/
 
+filter: https://www.centauri-dreams.org/2015/01/30/a-review-of-the-best-habitable-planet-candidates/ (by light from the star to confirm habitable or not between a set of value as condition -- stellar flux as well as limit of size no bigger than earth, as it could be made of gases not rocks like earth which makes it inhabitable -- planetary radius)
+
+final results for comparison by study vs code logic: https://phl.upr.edu/projects/habitable-exoplanets-catalog
