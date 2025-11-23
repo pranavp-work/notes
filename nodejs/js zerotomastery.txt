@@ -1,0 +1,246 @@
+javascript is a single threaded language and uses a callback queue. 
+javascript is an interpreted language?
+
+in a simple sense, the js engine also called the v8 engine understands js, and give the computer 1s and 0s, the computer understands, in a way acting as the translator between the user and computer.
+
+v8 engine is written in c++ language by programmers
+v8 was released in 2008 by google
+
+the first js engine was created by Brendan Eich.
+
+js file -> lexical analysis (breaks the code into tokens to identify their meaning) [parser] -> these tokens are now formed into ast (abstract syntax tree)
+
+fn jsengine(code) {
+ return code.split(/\s+/)
+}
+
+jsengine("var s = 5");
+
+outputs: [ 'var', 'a', '=', '5' ]
+
+everyone who is developing a js engine follows ecmascript standard
+
+>>next chapter: inside the v8 engine-
+
+jit compiler(just in time compiler)= interpreter + compiler (the best of both worlds, making use of both cons)
+
+interpreter in v8 engine is called ignition
+
+interpreter spits out byte code
+
+profiler looks out and constantly monitors if any optimizations can be made in the code being currently input to the interpreter
+
+then the interpreter gives some of the codes to the compiler that can be optimized
+
+the compiler changes or modifies the code by making it optimized so it can run faster
+
+then this optimized code takes place of the bytecode where those improvements are needed/ can be replaced. thus improving the execution speed of the javascript engine
+
+profiler and compiler constantly makes changes to the bytecode so it can be run faster by optimizing it and changing it to a more low level language
+
+the compiler in v8 engine is called the turbofan
+
+sometimes compiler can make mistakes such as trying to optimize code that dont need or deoptimization - that takes longer time to be reverted back to the interpreter, thus reversing the effect and taking up more time, so js code needs to be written properly
+
+is js an interpreted language? - depends on the implementation of the js engine
+
+problematic things that can mess up compilations in code :-
+eval()
+arguments - parameter destructuring can be used instead of arguments as a replacement
+for in - object.keys and iterating over it could be best over this
+with 
+delete
+(be really careful while using these above)
+
+- hidden classes - inline caching
+
+for example a code as follows:
+
+function findUser(user) {
+return 'found ${user.fName} ${user.lName}';
+}
+
+const userData = {
+ fName: 'Pranav',
+ lName: 'Prasad'
+};
+
+findUser(userData) // if this line were to repeat N times
+
+then the compiler will simply do inline caching and replaces the line by the output which is 'found Pranav Prasad' as an optimized code.
+
+// whereas hidden classes can de optimize the code in case of Classes
+such as:
+
+function Animal(x,y) {
+ this.x = x;
+ this.y = y;
+}
+
+const obj1 = new Animal(1, 2);
+const obj2 = new Animal(3, 4);
+
+obj1.a = 30;
+obj1.b = 100;
+
+obj2.b = 30; //
+obj2.a = 30; // these two codes right here can complicate it, as it is reversed and do something with hidden classes and messes up the compilation process
+
+instantiating object classes is needs to be proper and ordered way to remove the hidden classes mess
+(hidden classes is something compiler uses underneath the hood)
+
+hidden classes can also mean properties of the objects created as per the example above, the first few lines of the codes are in order, while giving properties to the object, and by end of line it is in disordered manner and that can complicate or confuse and think they dont have a shared hidden class and are two separate things!
+
+more predicable the code is, the better it will be as it will have no surprises and doesn't confuse the compiler
+
+why not just use the machine code from the beginning?
+- if that were the case then all of the competing browsers will have to accept to a standard that all need to follow such as, as the js files are sent from servers to client, and browsers will have to compile to the machine codes, so the competing browser will need to agree to a binary executable format or a standard that can understand and match it everywhere the same way
+
+and compiling ahead of time, is also makes the whole process slower
+
+- a such standard binary executable standard is called web assembly
+
+-> next 11. call stack and memory heap
+memory heap - where memory allocation happens
+call stack - to keep track of code execution
+
+memory heap is a free store like a large region in memory that the js engine provides us that can be used to store any type of arbitrary data in an unordered manner/fashion
+
+a lot of science goes into optimizing space allocation for this? research in detail!
+
+function subtractTwo(num) {
+return num - 2;
+}
+
+function calculate() {
+ const sumTotal = 4 + 5;
+ return subtractTwo(sumTotal);
+}
+
+calculate()
+
+(anonymous) in call stack refers to global execution context*
+
+simple variables may be stored in call stack, while arrays functions objects may be stored in memory heap? research in detail!
+
+the best thing about call stack is that it allows us to know where currently js is running by looking at the top of the stack
+
+js is a garbage collected language, this garbage collector frees memory on the heap, and prevents memory leaks!
+the garbabge collection in javascript works by an algo called 'mark and sweep'
+
+var human = {
+fname = 'hello',
+lname = 'world' };
+
+human = 5;
+
+// what really happens above, does it gets replaced, or the first statement has no reference or nothing points to it, like really! Research in detail!
+
+another code as an example:
+
+let array = [];
+for ( i=5; i>1; i++) {
+array.push(i-1);
+}
+
+//in this code memory leaks can happen
+- memory leaks are pices of memory that the applications have used in the past but aren't freed after their use, that are no longer needed
+
+// memory leaks can happen in ways such as declaring too many global variables that doesn't get freed up unlike functions when it goes out of scope where the garbage collector comes into play and sweeps the unwanted memory, too many event listeners that may be work according to a same action that has been assigned multiple times or just when more event listeners are added the memory might go out of space hence causing memory leaks, setintervals where you dont mention a timestop
+for example:
+setInterval(() => {
+//referencing objects...
+})
+
+// the objects will never be sweeped by the garbabge collector, as it keeps on running in intervals
+// research the above sentences in detail! some of it are written from my understanding...
+
+- js is a single threaded programming language meaning only one set of instructions are executed at a time. is by checking if it has only one call stack!
+- also js is synchronous that is in order, one at a time.
+
+//js run time // new topic to be researched!
+
+js run time that comes with browser provides its own web api, it allows things like sending http requests, listen to dom events or click events, delay execution using settimeout functions,it an also be used for caching or database storage on the browser. research in detail! where exactly it stores meaning in browser? memory or ssd?
+
+- indexedDB topic to research!
+
+- webApi = asynchronous
+
+* callback queue only pushes or puts items from it to call stack only after call stack is empty and the entire code has been read from line 1 to line N at least once(entire file been run?)!
+
+>> next: 22. Appendix Asynchronous JavaScript - Part 01 - 01. Quick Note;
+
+// promise - a promise is an object that may produce a single value some time in the future, either as  a resolved value or rejected value, in three states - fulfilled , rejected, or pending
+
+// the goal of async/await is to make the code look synchronous (it's asynchronous in logic)
+// async await - syntacitc sugar (underneath the hood, it's just Promise)
+// anything that returns a promise 'use await' eg: await fetch(); // fetch returns a promise
+
+// catch in try-catch recieves an error so you can use catch(err) {};
+
+// finally is a new feature in ES9. that works regardless if Promises .then & .catch both works or not, finally also recieves no parameter;
+
+// another new ES9 function - for await of
+
+// so javascript runtime contains: call stack, heap memory, event loop, callback queue (also called task queue), job queue(also called microtask queue, more priority than task queue/callback queue), web api
+
+// when there are multiple promises, you can do them in 3 ways - parallel, sequential, race. (in race, whichever executes first, and the rest are ignored.)
+
+// Promise.allSettled is a new feature is ES2020.
+
+// web workers
+// worker thread is a js program running on a different thread running in parallel to our main thread.
+
+const worker = new Worker('worker.js');
+worker.postMessage('message'); // then pass this message to something like a EventListener;
+
+// concurrency & parallelism
+
+const {spawn} = reequire('child_process');
+spawn('git', ['stuff']);
+
+// nodejs
+
+// nodejs is a javascript-runtime developed using chrome's v8 js engine
+nodejs is an environment for us to run js outside of a browser, by using a v8 engine and libuv library made with c++, the creator of nodejs created the bindings for the communications to happen between libuv and v9 engine, like anytime the code contains asynchronous i/o it hands it over to the libuv. and that's all it does.
+
+
+// next: nodejs 2. nodejs repl 04.
+
+
+// repl - read eval print loop
+
+
+// js  is a synchronous programming language out of the box, but the asynchronous part of it is only possible when used inside a browser or with node, thanks to lib uv library.
+// nodejs is an asynchronous event driven run time for js, that has nodejs bindings written in c++, and passes asynchrnous code to the libuv library, which itself is written in c language, non blocking functions are handled by the v8 engine itself 
+
+// next: 03. Nodejs Fundamentals internals part - 02 - 08. Multi threading, Processes and Threads.
+
+// event loop phases in node :
+    timers > i/o callbacks > setimmediate > close callbacks 
+    also there are other phases called idle and prepare phases that are internal in node 
+
+// observer design pattern
+
+// next: 03. nodejs fundamentals internals part 03 - 16. The Node Event Emitter
+
+// next: 04. nodejs fundamentals module system - 02. making http requests
+
+// next - - 04. creating our own modules
+
+// you don't necessarily need to mention filename.js while require in nodejs, as require in nodejs is defaulted to import js files
+    // its priority goes like .js > .json > .node - that is if it doesnt find .js in that name, it will look for .json then .node
+        // example: const request = require('./request') // require('./request.js') is the other way but it is unnecessary
+            // require.extensions will output what all extensions are supported and in which order, as require is a top level global object.
+
+// next - - 07. creating our own ecmascript modules
+
+// next - 05. nodejs fundamnetals package - 02. creating our first npm package
+
+// next - 05. nodejs fundamnetals package - 04. using third party modules
+
+// semantic versioning - means major.minor.patch updates in package.json & package-lock.json;
+    // package-lock.json gives the exact semantic versioning for packages so other developers from different machines or those who are cloning the code, can easily get the same working environment as the original developer intended.
+        // as different versions might change behaviors sometimes
+
+// next - 06. nodejs file io - planets project - 02. exploring planets with node
