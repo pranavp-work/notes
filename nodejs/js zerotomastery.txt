@@ -244,3 +244,16 @@ nodejs is an environment for us to run js outside of a browser, by using a v8 en
         // as different versions might change behaviors sometimes
 
 // next - 06. nodejs file io - planets project - 02. exploring planets with node
+
+// next - 07. web servers with nodejs - part 01 - 01. what is a web server
+
+// client and server communicates using http language,
+    while the client sends the request by mentioning the http method, http path, http body and http headers;
+        where method = post, put, get, delete 
+        path = resource that you're trying to access such as google.com/blogs/1
+        body = could be in json format for example {"message": "hello, bro", "photo": "goodmorning.jpg"};
+        headers = metadata of the data that is being sent, with the http request, like size of the body, or data type example: application/json or /xml, 
+
+    meanwhile the response contains the http body, http headers, http status code
+        status code: 200/300/400/500 series that indicates if client/server errors or redirection or success status codes
+         
