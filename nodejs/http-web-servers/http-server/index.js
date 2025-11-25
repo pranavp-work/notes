@@ -17,9 +17,21 @@ const friends = [
 ];
 
 const server = http.createServer((req, res) => {
+
     const items = req.url.split('/');
     console.log(items);
-    if( items[1] === 'friends') {
+
+    if ( req.method === 'POST' && items[1] === 'friends') {
+        req.on('data', (data) => {
+            console.log('Data received in buffered manner:', data);
+            const newFriend = data.toString();
+            console.log('Request Body:', newFriend);
+
+            friends.push(JSON.parse(newFriend));
+            res.statusCode = 201;
+            res.end();
+        })
+    } else if( req.method === 'GET' && items[1] === 'friends') {
         // res.writeHead(200, {
         //     // 'Content-Type': 'text/plain',
         //     'Content-Type': 'application/json',
@@ -41,7 +53,7 @@ const server = http.createServer((req, res) => {
         }
 
         
-    } else if ( items[1] === 'others') {
+    } else if ( req.method === 'GET' && items[1] === 'others') {
         res.statusCode = 200;
         res.setHeader('Content-Type', 'text/html');
 

@@ -47,3 +47,12 @@ https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Methods
 
 https://www.mulesoft.com/api/what-is-an-api
 
+https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status
+
+https://developer.mozilla.org/en-US/docs/Web/Security/Same-origin_policy
+
+https://developer.mozilla.org/en-US/docs/Glossary/Origin
+
+https://en.wikipedia.org/wiki/Whitelist
+
+https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/CORS

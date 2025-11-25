@@ -256,4 +256,16 @@ nodejs is an environment for us to run js outside of a browser, by using a v8 en
 
     meanwhile the response contains the http body, http headers, http status code
         status code: 200/300/400/500 series that indicates if client/server errors or redirection or success status codes
-         
+
+// an origin is made up of 3 things - protocol, host address, port number;
+    // example: https:// www.google.com :083 - where the port number is used to access a particular resource or application within a server like google maps applications from google server, a different port number maybe used to access gmail application.
+
+// same origin policy only applies on scripts like fetch('https://en.wikipedia.org') while inside google.com trying to GET data from wikipedia, so google can snoop on wiki data, so browser do not allow this cross origin request, but it has no issue, like if we are clicking on an html tag or static resource, like a link anchor tag, that opens a wikipedia page through a link provided by the html tag <>;
+
+// cors - cross origin resource sharing
+    // access-control-allow-origin in the headers decides if cors is allowed or not from a website
+    // the access-control-allow-origin allows us to whitelist certain services or privilieges, other than just blacklisting, as you can miss out 1 or more if not mentioned in the case of blacklisting, as blacklisting literally means specifying whom to block by explicitly mentioning them
+
+// (another idea : why updating chrome browser is really important as to fight the cross origin resource sharing and cross origin policy which can be exploited by the browser the client is using, as the browser enforces these rules and not the servers themselves.. also try to make sure this is real..
+
+    so if the chrome version have any sort of vulnerabilities present, the hackers who has made changes, can literally make cross origin access across web without us noticing through console and possibly steal all user data from websites)
