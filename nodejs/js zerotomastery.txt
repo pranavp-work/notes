@@ -269,3 +269,5 @@ nodejs is an environment for us to run js outside of a browser, by using a v8 en
 // (another idea : why updating chrome browser is really important as to fight the cross origin resource sharing and cross origin policy which can be exploited by the browser the client is using, as the browser enforces these rules and not the servers themselves.. also try to make sure this is real..
 
     so if the chrome version have any sort of vulnerabilities present, the hackers who has made changes, can literally make cross origin access across web without us noticing through console and possibly steal all user data from websites)
+
+// next: 08. First Express.js API - Part 01 - 02. Why Express

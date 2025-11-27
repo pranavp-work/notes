@@ -28,9 +28,14 @@ const server = http.createServer((req, res) => {
             console.log('Request Body:', newFriend);
 
             friends.push(JSON.parse(newFriend));
+            
             res.statusCode = 201;
-            res.end();
+            // res.end();
         })
+        req.pipe(res);
+        // console.log('pipe: res using req')
+        
+
     } else if( req.method === 'GET' && items[1] === 'friends') {
         // res.writeHead(200, {
         //     // 'Content-Type': 'text/plain',
