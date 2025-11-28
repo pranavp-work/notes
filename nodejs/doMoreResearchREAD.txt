@@ -1,0 +1,3 @@
+// Behind the Scenes: While the user sees the default port, the server infrastructure uses load balancers and reverse proxies to
+ distribute the request to the correct internal server/application farm, often using many different internal ports, but the client only communicates with the external-facing default port.
+
