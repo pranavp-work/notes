@@ -4,8 +4,44 @@ const app = express();
 
 const PORT = 3000;
 
-app.get('/' , (req, res) => {
-    res.send('Hello, world!');
+const friends = [
+    {
+        id: 0,
+        name: 'Albert',
+    },
+    {
+        id: 1,
+        name: 'Marie',
+    },
+    {
+        id: 2,
+        name: 'Isaac',
+    },
+];
+
+app.use((req, res, next) => {
+    const start = Date.now();
+    // console.log(` ${start}`);
+    next();
+    const duration = Date.now() - start;
+    console.log(`${req.method} ${req.url} - ${duration}ms`);
+})
+
+app.get('/friends', (req, res) => {
+    res.status(200).json(friends);
+});
+
+app.get('/friends/:friendId' , (req, res) => {
+    // res.send('Hello, world!');
+    const friendId = Number(req.params.friendId);
+    const friend = friends[friendId];
+
+    if (friend) {
+        res.status(200).json(friend);
+    } else {
+        res.status(404).json({ error: 'Friend not found'});
+    }
+
 });
 
 app.get('/messages', (req, res) => {
