@@ -93,3 +93,6 @@ https://github.com/nodejs/node/blob/main/lib/events.js
 
 https://github.com/nodejs/node/blob/main/lib/fs.js
 
+---------------------------------------------------------------------------
+
+https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller
