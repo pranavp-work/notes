@@ -1,6 +1,7 @@
 const express = require('express');
-const friendsController = require('./controllers/friends.controller');
-const messagesController = require('./controllers/messages.controller');
+
+const friendsRouter = require('./routes/friends.router');
+const messagesRouter = require('./routes/messages.router');
 
 const app = express();
 
@@ -11,17 +12,14 @@ app.use((req, res, next) => {
     // console.log(` ${start}`);
     next();
     const duration = Date.now() - start;
-    console.log(`${req.method} ${req.url} - ${duration}ms`);
+    console.log(`${req.method} ${req.baseUrl} ${req.url} - ${duration}ms`);
 })
 
 app.use(express.json());
 
-app.post('/friends', friendsController.postFriend);
-app.get('/friends', friendsController.getFriends);
-app.get('/friends/:friendId' , friendsController.getFriend);
+app.use('/friends', friendsRouter);
 
-app.get('/messages', messagesController.getMessages);
-app.post('/messages', messagesController.postMessage);
+app.use('/messages', messagesRouter);
 
 app.listen(PORT, () => {
     console.log(`Express server is running on http://localhost:${PORT}`);
