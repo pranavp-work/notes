@@ -96,3 +96,9 @@ https://github.com/nodejs/node/blob/main/lib/fs.js
 ---------------------------------------------------------------------------
 
 https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller
+
+https://restapitutorial.com/
+
+https://aws.amazon.com/cloudfront/features/
+
+https://expressjs.com/en/guide/using-template-engines.html
