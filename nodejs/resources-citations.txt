@@ -102,3 +102,9 @@ https://restapitutorial.com/
 https://aws.amazon.com/cloudfront/features/
 
 https://expressjs.com/en/guide/using-template-engines.html
+
+https://github.com/arwes/arwes
+
+https://create-react-app.dev/
+
+https://www.npmjs.com/package/cross-env
